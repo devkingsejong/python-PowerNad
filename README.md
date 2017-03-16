@@ -55,10 +55,36 @@ campaign = Campaign('API 호출 주소', 'API 키', 'Secret 키', '유저 고유
 (1) 캠페인 아이디를 기반으로 그룹 불러오기
 
 ```python
-group_list = campaign.get_adgroup_list(campaignid = 'cmp-xxxxx')
+group_list = campaign.get_adgroup_list('cmp-xxxxx')
 ```
 
-(2)그룹 아이디를 기반으로 그룹 리스트 불러오기
+(2) 그룹 아이디를 기반으로 그룹 리스트 불러오기
 ```python
 group_list2 = ad_group.get_adgroup_list_by_ids(그룹고유번호)
+```
+## License
+
+```
+Copyright (c) <2017> <[devkingsejong](https://github.com/devkingsejong/python-PowerNad)>
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
 ```
