@@ -30,8 +30,8 @@ powernad는 크게 API들이 정의 되어 있는 ```API```와 Request Object들
 특정 API를 사용하고 싶다면,
 
 ```python
-from powernad.API import AdGroup
-from powernad.API import Campaign
+from powernad.API.AdGroup import *
+from powernad.API.Campaign import *
 ```
 위와 같이 [네이버 광고 API](http://naver.github.io/searchad-apidoc/#/guides)에 정의되어 있는 API명을 import합니다.
 
