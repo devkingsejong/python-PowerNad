@@ -1,4 +1,5 @@
 # PowerNad
+## 과제용 프로젝트임에도 관심가져 주셔서 감사합니다. :)
 
 [![PowerNad](https://img.shields.io/badge/python-3.4%2C%203.5%2C%203.6-blue.svg)]()
 [![PowerNad](https://img.shields.io/vso/build/larsbrinkhoff/953a34b9-5966-4923-a48a-c41874cfb5f5/1.svg)]()
