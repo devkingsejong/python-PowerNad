@@ -7,7 +7,7 @@ import os
 
 setup(
     name    = 'powernad', 
-    version = '0.6.5', 
+    version = '0.8.0',
     packages=find_packages(),
     author = 'devkingsejong',
     author_email = 'devkingsejong@gmail.com', 
@@ -20,6 +20,6 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
     keywords='Easy to use naver ad to python',
-    url = 'https://hello.adcloudlabs.com',
+    url = 'https://github.com/devkingsejong/python-PowerNad',
     description = 'Easy to use naver ad to python',
 )
