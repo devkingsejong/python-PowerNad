@@ -14,3 +14,6 @@ class StatReportObject:
         self.statDt = None if 'statDt' not in s else s['statDt']
         self.status = None if 'status' not in s else s['status']
         self.updateTm = None if 'updateTm' not in s else s['updateTm']
+
+        self.code = None if 'code' not in s else s['code']
+        self.message = None if 'message' not in s else s['message']

@@ -29,6 +29,10 @@ class MasterReport: #광고정보일괄다운로드탭
         
         result = MasterReportObject(result)
         return result
+    
+    def download_master_report_by_url(self, url: str, localpath: str):
+        result = self.r.download('/report-download', url, localpath)
+        return result
 
     def create_master_report(self, CreateMasterReportObject: CreateMasterReportObject) -> MasterReportObject:
         data = jsonpickle.encode(CreateMasterReportObject, unpicklable=False)
@@ -42,8 +46,7 @@ class MasterReport: #광고정보일괄다운로드탭
         return result
 
     def delete_master_report_all(self):
-        self.r.delete('/master-reports')
-        return True
+        return self.r.delete('/master-reports')
 
     def delete_master_report_by_id(self, id: str):
         self.r.delete('/master-reports', {'id': id})
