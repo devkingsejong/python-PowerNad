@@ -27,6 +27,10 @@ class StatReport: #대용량 보고서
         result = StatReportObject(result)
         
         return result
+    
+    def download_stat_report_by_url(self, url: str, localpath: str):
+        result = self.r.download('/report-download', url, localpath)
+        return result
 
     def create_stat_report(self, CreateStatReportObject: CreateStatReportObject) -> StatReportObject:
         

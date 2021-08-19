@@ -6,6 +6,7 @@ import urllib.parse
 import json
 import requests
 import jsonpickle
+import shutil
 
  
 class RestApi:
@@ -66,10 +67,28 @@ class RestApi:
             header = response.headers
             body = response.text
             transaction_id = self.get_transaction_id(header)
-            json_body = json.loads(body)
-
-            return {'transaction_id': transaction_id, 'json': json_body}
+            if len(body):
+                json_body = json.loads(body)
+            else:
+                json_body = {}
+            if type(json_body) == list:
+                json_body.append({'transaction_id': transaction_id})
+            if type(json_body) == dict:
+                json_body['transaction_id'] = transaction_id
             
+            return {'transaction_id': transaction_id, 'json': json_body}
+        else:  # ex) http status 400 with {"code":11001,"message":"잘못된 파라미터 형식입니다."} 1년을 초과한 날짜를 요청하면 발생
+            header = response.headers
+            transaction_id = self.get_transaction_id(header)
+            if transaction_id != "unknown":
+                body = response.text
+                if len(body):
+                    json_body = json.loads(body)
+                    json_keys = list(json_body.keys())
+                    if 'code' in json_keys and 'message' in json_keys:
+                        json_body['transaction_id'] = transaction_id
+                        return {'transaction_id': transaction_id, 'json': json_body}
+        
         return {}
 
 
@@ -78,11 +97,11 @@ class RestApi:
         headers = self.get_header('GET', uri) 
 
         try:
-            r = requests.get(url, headers=headers)         
+            r = requests.get(url, headers=headers)
             response = self.parse_response(r)
             if not r.ok:
                 print("Http status: %s" % r.status_code)
-
+            
             return response['json']
         except:
             print("failed to request")
@@ -93,15 +112,15 @@ class RestApi:
         data_str = data
         headers = self.get_header('POST', uri)
         
-        try:
-            r = requests.post(url, data=data_str, headers=headers)
-            response = self.parse_response(r)
-            if not r.ok:
-                print("Http status: %s" % r.status_code)
-                
-            return response['json']
-        except:
-            print("failed to request")
+        #try:
+        r = requests.post(url, data=data_str, headers=headers)
+        response = self.parse_response(r)
+        if not r.ok:
+            print("Http status: %s" % r.status_code)
+            
+        return response['json']
+        #except:
+        #    print("failed to request")
 
 
     def delete(self, uri, query={}):
@@ -136,8 +155,12 @@ class RestApi:
             print("failed to request")
 
 
-    def download(self, url, localpath):
-        return None
+    def download(self, uri, rpt_download_url, localpath):
+        headers = self.get_header('GET', uri)
+        response = requests.get(rpt_download_url, headers=headers, stream=True)
+        with open(localpath, 'wb') as out_file:
+            shutil.copyfileobj(response.raw, out_file)
+        return True
 
     def null_dict(self, input_dict):
         real = dict()
